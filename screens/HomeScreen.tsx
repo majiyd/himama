@@ -41,6 +41,7 @@ const HomeScreen = () => {
         renderItem={({item}) => (
           <ClassroomListItem name={item?.name} id={item?.id} />
         )}
+        keyExtractor={item => item.id}
       />
     </View>
   );
