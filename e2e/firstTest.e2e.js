@@ -10,6 +10,9 @@ describe('Himama', () => {
   it('Can view students in class', async () => {
     await expect(element(by.text('Home'))).toBeVisible();
     // time for network call
+    await waitFor(element(by.text('Eggfruit room')))
+      .toExist()
+      .withTimeout(4000);
     await expect(element(by.text('Eggfruit room'))).toBeVisible();
     await element(by.text('Eggfruit room')).tap();
     await expect(element(by.text('Peter Rabbit'))).toBeVisible();
@@ -19,7 +22,9 @@ describe('Himama', () => {
 
   it('Can check student and move student', async () => {
     // time for network call
-    setTimeout(() => {}, 4000);
+    await waitFor(element(by.text('Eggfruit room')))
+      .toExist()
+      .withTimeout(4000);
     await element(by.text('Eggfruit room')).tap();
     await expect(element(by.text('Peter Rabbit'))).toBeVisible();
     await element(by.id('Peter Rabbit')).tap();
@@ -36,8 +41,10 @@ describe('Himama', () => {
   });
 
   it('Can Switch between classes', async () => {
-    // time for network call
-    setTimeout(() => {}, 4000);
+    await waitFor(element(by.text('Eggfruit room')))
+      .toExist()
+      .withTimeout(4000);
+
     await expect(element(by.text('Eggfruit room'))).toBeVisible();
     await element(by.text('Eggfruit room')).tap();
     await expect(element(by.text('Peter Rabbit'))).toBeVisible();
