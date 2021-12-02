@@ -13,6 +13,7 @@ type Props = {
   classrooms: IClassroom[];
   handlePress: (id: string) => void;
 };
+
 const ClassroomModal = ({close, classrooms, handlePress}: Props) => {
   return (
     <Pressable style={styles.modal} onPress={close}>

@@ -37,6 +37,7 @@ const ChildItem = ({
             testID={fullName}
             style={[
               styles.statusText,
+              // eslint-disable-next-line react-native/no-inline-styles
               {color: checked_in ? 'green' : 'tomato'},
             ]}>
             {checked_in ? 'In' : 'Out'}

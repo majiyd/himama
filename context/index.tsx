@@ -21,14 +21,18 @@ const AppProvider = ({children}: Props) => {
   };
 
   const toggleStudent = (fullName: string, classroom: string) => {
+    // get current class
     const currentClass = data.classrooms.find(c => c.id === classroom);
+
     if (!currentClass) {
       Alert.alert('', 'Invalid class');
       return;
     }
 
+    // map through children in current class
     const newChildren = currentClass.children.map(child => {
       if (child.fullName === fullName) {
+        // toggle attendance
         return {
           checked_in: !child.checked_in,
           fullName,
@@ -38,6 +42,7 @@ const AppProvider = ({children}: Props) => {
       }
     });
 
+    // update classrooms
     const newClassroomObject = data.classrooms.map(c => {
       if (c.id === classroom) {
         return {
@@ -49,6 +54,7 @@ const AppProvider = ({children}: Props) => {
       }
     });
 
+    // update data
     const newData = {
       ...data,
       classrooms: newClassroomObject,
@@ -62,7 +68,9 @@ const AppProvider = ({children}: Props) => {
     currentClassroom: string,
     newClassroom: string,
   ) => {
+    // map through class rooms
     const newClassroomObject = data.classrooms.map(classroom => {
+      // add child to new class
       if (classroom.id === newClassroom) {
         return {
           ...classroom,
@@ -72,6 +80,7 @@ const AppProvider = ({children}: Props) => {
           ],
         };
       } else if (classroom.id === currentClassroom) {
+        // remove child from current class
         return {
           ...classroom,
           children: classroom.children.filter(
@@ -83,6 +92,7 @@ const AppProvider = ({children}: Props) => {
       }
     });
 
+    // update classrooms and set data
     const newData: IAppData = {
       ...data,
       classrooms: newClassroomObject,
