@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>926470451256-14kk3mtc363t0iaiivufdngsp3evdu3k.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.926470451256-14kk3mtc363t0iaiivufdngsp3evdu3k</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD33h6y6odBdbAzix0yb7WhJg9RBJaiKU0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>926470451256</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.himama</string>
+	<key>PROJECT_ID</key>
+	<string>himama-test</string>
+	<key>STORAGE_BUCKET</key>
+	<string>himama-test.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:926470451256:ios:9bd337ca231b97ac27f6cd</string>
+	<key>DATABASE_URL</key>
+	<string>https://himama-test-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
