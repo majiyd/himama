@@ -3,12 +3,19 @@ import {View, Text, FlatList, StyleSheet} from 'react-native';
 import {IChildren} from '../@types/baseTypes';
 import ChildItem from '../components/ChildItem';
 import {AppContext} from '../context';
+import ClassroomModal from './ClassroomModal';
+
+const defaultChild = {
+  fullName: '',
+  checked_in: false,
+};
 
 const ClassroomScreen = ({route}) => {
   const [children, setChildren] = useState<IChildren[] | undefined>(undefined);
+  const [showModal, setShowModal] = useState<IChildren>();
 
   const {id} = route.params;
-  const {data, toggleStudent} = useContext(AppContext);
+  const {data, toggleStudent, moveStudent} = useContext(AppContext);
   const allClassroomsAccessible = data?.allClassroomsAccessible;
 
   useEffect(() => {
@@ -28,21 +35,39 @@ const ClassroomScreen = ({route}) => {
     toggleStudent && toggleStudent(fullname, id);
   };
 
+  const handleChangeClass = (newClass: string) => {
+    setShowModal(undefined);
+    if (id === newClass || !moveStudent || !showModal) {
+      return;
+    }
+    moveStudent(showModal, id, newClass);
+  };
+
   return (
-    <View style={styles.classroom}>
-      <FlatList
-        style={styles.flatlist}
-        data={children || []}
-        renderItem={({item}) => (
-          <ChildItem
-            child={item}
-            allClassroomsAccessible={allClassroomsAccessible}
-            handleToggle={() => handleToggle(item.fullName)}
-          />
-        )}
-        keyExtractor={item => item.fullName}
-      />
-    </View>
+    <>
+      <View style={styles.classroom}>
+        <FlatList
+          style={styles.flatlist}
+          data={children || []}
+          renderItem={({item}) => (
+            <ChildItem
+              child={item}
+              allClassroomsAccessible={allClassroomsAccessible}
+              handleToggle={() => handleToggle(item.fullName)}
+              handleMove={() => setShowModal(item)}
+            />
+          )}
+          keyExtractor={item => item.fullName}
+        />
+      </View>
+      {showModal?.fullName ? (
+        <ClassroomModal
+          close={() => setShowModal(undefined)}
+          classrooms={data?.classrooms || []}
+          handlePress={handleChangeClass}
+        />
+      ) : null}
+    </>
   );
 };
 

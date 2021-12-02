@@ -21,7 +21,7 @@ export type AppContextType = {
   toggleStudent: (fullName: string, classroom: string) => void;
   updateData: (newData: IAppData) => void;
   moveStudent: (
-    fullName: string,
+    fullName: IChildren,
     currentClassroom: string,
     newClassroom: string,
   ) => void;

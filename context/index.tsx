@@ -1,6 +1,6 @@
 import React, {createContext, useState} from 'react';
 import {Alert} from 'react-native';
-import {AppContextType, IAppData} from '../@types/baseTypes';
+import {AppContextType, IAppData, IChildren} from '../@types/baseTypes';
 
 export const AppContext = createContext<Partial<AppContextType>>({});
 
@@ -38,7 +38,7 @@ const AppProvider = ({children}: Props) => {
       }
     });
 
-    const newClassrooms = data.classrooms.map(c => {
+    const newClassroomObject = data.classrooms.map(c => {
       if (c.id === classroom) {
         return {
           ...c,
@@ -51,18 +51,44 @@ const AppProvider = ({children}: Props) => {
 
     const newData = {
       ...data,
-      classrooms: newClassrooms,
+      classrooms: newClassroomObject,
     };
 
     setData(newData);
   };
 
   const moveStudent = (
-    fullName: string,
+    student: IChildren,
     currentClassroom: string,
     newClassroom: string,
   ) => {
-    console.log('object', fullName, currentClassroom, newClassroom);
+    const newClassroomObject = data.classrooms.map(classroom => {
+      if (classroom.id === newClassroom) {
+        return {
+          ...classroom,
+          children: [
+            ...(classroom?.children ?? []),
+            {fullName: student.fullName, checked_in: student.checked_in},
+          ],
+        };
+      } else if (classroom.id === currentClassroom) {
+        return {
+          ...classroom,
+          children: classroom.children.filter(
+            child => child.fullName !== student.fullName,
+          ),
+        };
+      } else {
+        return classroom;
+      }
+    });
+
+    const newData: IAppData = {
+      ...data,
+      classrooms: newClassroomObject,
+    };
+
+    setData(newData);
   };
 
   return (

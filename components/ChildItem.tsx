@@ -6,8 +6,14 @@ type Props = {
   child: IChildren;
   allClassroomsAccessible: boolean | undefined;
   handleToggle: () => void;
+  handleMove: () => void;
 };
-const ChildItem = ({child, allClassroomsAccessible, handleToggle}: Props) => {
+const ChildItem = ({
+  child,
+  allClassroomsAccessible,
+  handleToggle,
+  handleMove,
+}: Props) => {
   const {fullName, checked_in} = child;
 
   return (
@@ -26,24 +32,24 @@ const ChildItem = ({child, allClassroomsAccessible, handleToggle}: Props) => {
       <View style={styles.details}>
         <Text>{fullName}</Text>
         <Pressable style={styles.status} hitSlop={10} onPress={handleToggle}>
-          <Text>Checked In: </Text>
+          <Text>Attendance: </Text>
           <Text
             style={[
               styles.statusText,
               {color: checked_in ? 'green' : 'tomato'},
             ]}>
-            {checked_in ? 'Yes' : 'No'}
+            {checked_in ? 'In' : 'Out'}
           </Text>
         </Pressable>
       </View>
 
-      {allClassroomsAccessible && (
+      {allClassroomsAccessible ? (
         <View style={styles.move}>
-          <Pressable hitSlop={8}>
+          <Pressable hitSlop={8} onPress={handleMove}>
             <Text style={styles.moveText}>Move</Text>
           </Pressable>
         </View>
-      )}
+      ) : null}
     </View>
   );
 };
