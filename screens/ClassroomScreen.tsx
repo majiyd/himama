@@ -1,16 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {View, FlatList, StyleSheet} from 'react-native';
 import {IChildren} from '../@types/baseTypes';
 import ChildItem from '../components/ChildItem';
 import {AppContext} from '../context';
 import ClassroomModal from './ClassroomModal';
 
-const defaultChild = {
-  fullName: '',
-  checked_in: false,
+type Props = {
+  route: any;
 };
 
-const ClassroomScreen = ({route}) => {
+const ClassroomScreen = ({route}: Props) => {
   const [children, setChildren] = useState<IChildren[] | undefined>(undefined);
   const [showModal, setShowModal] = useState<IChildren>();
 
@@ -20,6 +19,7 @@ const ClassroomScreen = ({route}) => {
 
   useEffect(() => {
     getChildren();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.classrooms]);
 
   const getChildren = () => {
@@ -27,7 +27,6 @@ const ClassroomScreen = ({route}) => {
       classroom => classroom.id === id,
     );
 
-    console.log('object', currentClass);
     setChildren(currentClass?.children);
   };
 

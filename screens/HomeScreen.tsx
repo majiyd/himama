@@ -1,5 +1,11 @@
-import React, {useContext, useEffect, useState, useCallback} from 'react';
-import {View, Text, FlatList, StyleSheet} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 
 import database from '@react-native-firebase/database';
 import {AppContext} from '../context';
@@ -33,6 +39,18 @@ const HomeScreen = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <View>
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
+  if (error) {
+    return <Text>An Error Occure: {error}</Text>;
+  }
+
   return (
     <View style={styles.home}>
       <Text style={styles.headerText}>Classrooms</Text>
@@ -42,6 +60,7 @@ const HomeScreen = () => {
           <ClassroomListItem name={item?.name} id={item?.id} />
         )}
         keyExtractor={item => item.id}
+        ListEmptyComponent={() => <Text>No Classes available</Text>}
       />
     </View>
   );

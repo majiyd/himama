@@ -16,6 +16,7 @@ function App() {
           <Stack.Screen
             name="Classroom"
             component={ClassroomScreen}
+            // @ts-ignore
             options={({route}) => ({title: route.params?.name})}
           />
         </Stack.Navigator>
