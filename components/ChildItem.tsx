@@ -34,6 +34,7 @@ const ChildItem = ({
         <Pressable style={styles.status} hitSlop={10} onPress={handleToggle}>
           <Text>Attendance: </Text>
           <Text
+            testID={fullName}
             style={[
               styles.statusText,
               {color: checked_in ? 'green' : 'tomato'},
@@ -46,7 +47,9 @@ const ChildItem = ({
       {allClassroomsAccessible ? (
         <View style={styles.move}>
           <Pressable hitSlop={8} onPress={handleMove}>
-            <Text style={styles.moveText}>Move</Text>
+            <Text style={styles.moveText} testID={`${fullName}-move`}>
+              Move
+            </Text>
           </Pressable>
         </View>
       ) : null}

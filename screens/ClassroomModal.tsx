@@ -24,7 +24,7 @@ const ClassroomModal = ({close, classrooms, handlePress}: Props) => {
               style={styles.classroom}
               key={classroom.id}
               onPress={() => handlePress(classroom.id)}>
-              <Text style={styles.text}>{classroom.name}</Text>
+              <Text style={styles.text}>{String(classroom.name).trim()}</Text>
             </Pressable>
           ))}
         </ScrollView>
