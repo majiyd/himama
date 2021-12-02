@@ -14,3 +14,10 @@
 - Breakdown app development into smaller steps
 - Determine tools to use to better implement workflow
 - Plan file structure
+
+## improvement
+
+- fix type issues
+- add id to children
+- use callback
+- better ui development/UX

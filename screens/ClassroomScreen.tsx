@@ -8,7 +8,7 @@ const ClassroomScreen = ({route}) => {
   const [children, setChildren] = useState<IChildren[] | undefined>(undefined);
 
   const {id} = route.params;
-  const {data} = useContext(AppContext);
+  const {data, toggleStudent} = useContext(AppContext);
   const allClassroomsAccessible = data?.allClassroomsAccessible;
 
   useEffect(() => {
@@ -24,6 +24,10 @@ const ClassroomScreen = ({route}) => {
     setChildren(currentClass?.children);
   };
 
+  const handleToggle = (fullname: string) => {
+    toggleStudent && toggleStudent(fullname, id);
+  };
+
   return (
     <View style={styles.classroom}>
       <FlatList
@@ -33,8 +37,10 @@ const ClassroomScreen = ({route}) => {
           <ChildItem
             child={item}
             allClassroomsAccessible={allClassroomsAccessible}
+            handleToggle={() => handleToggle(item.fullName)}
           />
         )}
+        keyExtractor={item => item.fullName}
       />
     </View>
   );

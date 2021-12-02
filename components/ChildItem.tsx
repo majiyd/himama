@@ -5,9 +5,11 @@ import {IChildren} from '../@types/baseTypes';
 type Props = {
   child: IChildren;
   allClassroomsAccessible: boolean | undefined;
+  handleToggle: () => void;
 };
-const ChildItem = ({child, allClassroomsAccessible}: Props) => {
+const ChildItem = ({child, allClassroomsAccessible, handleToggle}: Props) => {
   const {fullName, checked_in} = child;
+
   return (
     <View style={styles.item}>
       <View>
@@ -23,7 +25,7 @@ const ChildItem = ({child, allClassroomsAccessible}: Props) => {
 
       <View style={styles.details}>
         <Text>{fullName}</Text>
-        <Pressable style={styles.status} hitSlop={10}>
+        <Pressable style={styles.status} hitSlop={10} onPress={handleToggle}>
           <Text>Checked In: </Text>
           <Text
             style={[

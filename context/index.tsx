@@ -1,9 +1,8 @@
 import React, {createContext, useState} from 'react';
+import {Alert} from 'react-native';
 import {AppContextType, IAppData} from '../@types/baseTypes';
 
-export const AppContext = createContext<Partial<AppContextType>>({
-  updateData: () => {},
-});
+export const AppContext = createContext<Partial<AppContextType>>({});
 
 type Props = {
   children: React.ReactNode;
@@ -18,12 +17,44 @@ const AppProvider = ({children}: Props) => {
   });
 
   const updateData = (newData: IAppData) => {
-    console.log('newData', newData);
     setData(newData);
   };
 
   const toggleStudent = (fullName: string, classroom: string) => {
-    console.log('id', fullName, classroom);
+    const currentClass = data.classrooms.find(c => c.id === classroom);
+    if (!currentClass) {
+      Alert.alert('', 'Invalid class');
+      return;
+    }
+
+    const newChildren = currentClass.children.map(child => {
+      if (child.fullName === fullName) {
+        return {
+          checked_in: !child.checked_in,
+          fullName,
+        };
+      } else {
+        return child;
+      }
+    });
+
+    const newClassrooms = data.classrooms.map(c => {
+      if (c.id === classroom) {
+        return {
+          ...c,
+          children: newChildren,
+        };
+      } else {
+        return c;
+      }
+    });
+
+    const newData = {
+      ...data,
+      classrooms: newClassrooms,
+    };
+
+    setData(newData);
   };
 
   const moveStudent = (
