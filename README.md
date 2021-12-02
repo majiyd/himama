@@ -58,10 +58,12 @@ If you don't know about detox, learn more [here](https://github.com/wix/Detox) a
   - Build Screens
   - Add functionalities
   - Test
-- I took some time to determine which tools, how best to propagate data from screen to screen, etc. For example, I chose to use the `Context API` or instead of complex prop tunnelling or redux because it's easy to setup and effecient
+- I took some time to determine which tools, how best to propagate data from screen to screen, etc. For example, I chose to use the `Context API` instead of complex prop tunnelling or redux because it's easy to setup and effecient
 - Write code
 
 My flow didn't change much because i did a lot of planning before writing code so things were pretty straight forward
+
+I chose `Context api` for state managemet because it's helps prevent expensive prop tunnelling and is easier to setup and use compared to `redux`. I chose `react-navigation` because it a robust, well used and well documented tolo for navigation. It also comes a number of feature out of the box like passing data between screens and dynamically setting header title
 
 ## Improvements
 
